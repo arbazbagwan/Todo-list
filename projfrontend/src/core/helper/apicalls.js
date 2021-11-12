@@ -15,8 +15,8 @@ export const createTodo = user => {
     .catch(error => console.log(error));
 };
 
-export const getTodo = () => {
-  return fetch(`${API}/todo`, {
+export const getTodo = (belongsto) => {
+  return fetch(`${API}/todo/${belongsto}`, {
     method: "GET"
   })
     .then(response => {
@@ -25,8 +25,8 @@ export const getTodo = () => {
     .catch(err => console.log(err));
 };
 
-export const getallTodo = () => {
-  return fetch(`${API}/upcomming`, {
+export const getallTodo = (belongsto) => {
+  return fetch(`${API}/upcomming/${belongsto}`, {
     method: "GET"
   })
     .then(response => {
@@ -44,6 +44,33 @@ export const deleteTodo = (todoId) => {
   })
     .then(response => {
       return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const geteditTodo = (todoid) => {
+  return fetch(`${API}/gettodobyid/${todoid}`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const updatetodolist = (etodoid, elist) => {
+  return fetch(`${API}/updatetodo/${etodoid}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body:JSON.stringify(elist)
+    
+  })
+    .then(response => {
+      return response.json();
+     
     })
     .catch(err => console.log(err));
 };

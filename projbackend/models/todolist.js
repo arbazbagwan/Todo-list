@@ -14,6 +14,9 @@ var listschema = new mongoose.Schema({
     sdate: { 
         type: Date,
     },
+    belongsto: {
+        type: String,
+    },
 })
 
 module.exports = mongoose.model("listSchema", listschema);

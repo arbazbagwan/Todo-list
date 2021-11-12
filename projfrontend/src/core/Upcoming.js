@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import Base from "./Base";
 import { getallTodo, deleteTodo } from "../core/helper/apicalls";
 import Sidebar from "./Sidebar";
+import Menu from "./Menu";
+
 
 export default function Home() {
+  var belongsto = localStorage.getItem("name");
 
     const [values, setValues] = useState({
         upcominglist:"",
@@ -13,7 +16,7 @@ export default function Home() {
     const {upcominglist, error} = values;
     
     const preload = () => {
-        getallTodo().then(data => {
+        getallTodo(belongsto).then(data => {
           console.log(data);
           if (data.error) {
             setValues({ ...values, error: data.error });
@@ -64,6 +67,8 @@ export default function Home() {
                     ))}
                         </div>
                     </div>
+         <Menu />
+
           <Sidebar />
             </Base>
     )

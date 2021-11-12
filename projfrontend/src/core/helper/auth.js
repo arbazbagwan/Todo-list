@@ -15,6 +15,21 @@ export const signin = user => {
       .catch(error => console.log(error));
   };
 
+  export const signup = user => {
+    return fetch(`${API}/signup`, {
+      method:"POST",
+      headers: {
+        Accept:"application/json",
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(user)
+    })
+      .then(response => {
+        return response.json();
+      })
+      .catch(error => console.log(error));
+  };
+
   export const isAutheticated = () => {
     if (typeof window == "undefined") {
       return false;
@@ -29,6 +44,8 @@ export const signin = user => {
   export const authenticate = (data, next) => {
     if (typeof window !== "undefined") {
       localStorage.setItem("jwt", JSON.stringify(data));
+      localStorage.setItem("name", data.user.name);
+
       next();
     }
   };

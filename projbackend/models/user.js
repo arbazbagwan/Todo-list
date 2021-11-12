@@ -9,6 +9,7 @@ var userSchema = new mongoose.Schema(
             type: String,
             required: true,
             maxlength: 32,
+            minlength:3,
             trim: true
         },
         email: {
@@ -19,7 +20,8 @@ var userSchema = new mongoose.Schema(
         },
         encry_password: {
             type: String,
-            required: true
+            required: true,
+            minlength:3,
         },
         salt: String,
     },
