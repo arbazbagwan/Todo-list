@@ -26,10 +26,10 @@ export default function Home() {
     success: false,
     error: "",
     list: [],
-    edittodo:[],
-    etitle:"",
-    edescription:"",
-    eid:"",
+    edittodo: [],
+    etitle: "",
+    edescription: "",
+    eid: "",
   });
 
   const [sdate, setStartDate] = useState(new Date());
@@ -134,7 +134,7 @@ export default function Home() {
                       className="flex-no-shrink pt-1 pb-1 ml-2 border-2 rounded hover:bg-red-600 pl-6 pr-6"><i class="fa fa-trash" aria-hidden="true" ></i></button>
                     {/* edit button */}
                     <button type="button" className="flex-no-shrink pt-1 pb-1 ml-2 border-2 rounded hover:bg-pink-600 pl-6 pr-6"
-                      onClick={() => {setOpen(true); showedit(cate._id)}}
+                      onClick={() => { setOpen(true); showedit(cate._id) }}
                     ><i class="fas fa-edit"></i>
                     </button>
                     {/* {---------} */}
@@ -152,33 +152,33 @@ export default function Home() {
 
   const showedit = (todoid) => {
     geteditTodo(todoid)
-    .then(data => {
-      if(data.error){
-        console.log("error in getting to react")
-      }
-      else{
-        setValues({...values, edittodo: data, etitle: data[0].title, edescription: data[0].description, edate: data[0].sdate, eid: data[0]._id});
-        console.log(data[0].title);
-      }
-    })
-    .catch(err => console.log(err))
+      .then(data => {
+        if (data.error) {
+          console.log("error in getting to react")
+        }
+        else {
+          setValues({ ...values, edittodo: data, etitle: data[0].title, edescription: data[0].description, edate: data[0].sdate, eid: data[0]._id });
+          console.log(data[0].title);
+        }
+      })
+      .catch(err => console.log(err))
   }
 
-  const edittodolist = (eupdateid) =>{
+  const edittodolist = (eupdateid) => {
     var title = etitle;
     var description = edescription;
     var sdate = edate;
-    updatetodolist(eupdateid, {title, description, sdate})
-    .then(data => {
-      if(data.error){
-        console.log("error to update the todo list")
-      }
-      else{
-        console.log("edited");
-        preload();
-      }
-    })
-    .catch(err => console.log(err))
+    updatetodolist(eupdateid, { title, description, sdate })
+      .then(data => {
+        if (data.error) {
+          console.log("error to update the todo list")
+        }
+        else {
+          console.log("edited");
+          preload();
+        }
+      })
+      .catch(err => console.log(err))
   }
 
   const popup = () => {
@@ -226,22 +226,21 @@ export default function Home() {
                         </Dialog.Title>
                         <div className="mt-2">
                           <div className="mb-4 pb-11">
-                                <div>
-                                <div className="flex mt-4">
-                              <input className=" appearance-none focus:outline-none focus:ring focus:border-blue-300 rounded w-full py-2 px-3 mr-4 text-grey-darker font-mono font-family: ui-monospace text-xl" placeholder="Title"
-                                value={etitle} onChange={handleChange("etitle")} />
+                            <div>
+                              <div className="flex mt-4">
+                                <input className=" appearance-none focus:outline-none focus:ring focus:border-blue-300 rounded w-full py-2 px-3 mr-4 text-grey-darker font-mono font-family: ui-monospace text-xl" placeholder="Title"
+                                  value={etitle} onChange={handleChange("etitle")} />
+                              </div>
+                              <div className="flex mt-4">
+                                <input className=" appearance-none focus:outline-none focus:ring focus:border-blue-300 rounded w-full py-2 px-3 mr-4 text-grey-darker font-mono font-family: ui-monospace text-xl" placeholder="Description"
+                                  value={edescription} onChange={handleChange("edescription")} />
+                              </div>
+                              <div className="h-full w-full pt-4 pb-11 ml-3">
+                                <DatePicker selected={moment(edate).toDate()} onChange={(edate) => editStartDate(edate)} className="focus:outline-none focus:ring focus:border-blue-300 rounded font-mono font-family: ui-monospace text-xl" />
+                              </div>
+                              <div className="flex mt-4 ml-3 pb-14">
+                              </div>
                             </div>
-                            <div className="flex mt-4">
-                              <input className=" appearance-none focus:outline-none focus:ring focus:border-blue-300 rounded w-full py-2 px-3 mr-4 text-grey-darker font-mono font-family: ui-monospace text-xl" placeholder="Description"
-                                value={edescription} onChange={handleChange("edescription")} />
-                            </div>
-                            <div className="h-full w-full pt-4 pb-11 ml-3">
-                              <DatePicker selected={moment(edate).toDate()} onChange={(edate) => editStartDate(edate)}  className="focus:outline-none focus:ring focus:border-blue-300 rounded font-mono font-family: ui-monospace text-xl" />
-                            </div>
-                            <div className="flex mt-4 ml-3 pb-14">
-                            </div>
-                            </div>
-                             
                           </div>
                         </div>
                       </div>
@@ -251,7 +250,7 @@ export default function Home() {
                     <button
                       type="button"
                       className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                      onClick={() => {setOpen(false); edittodolist(eid)}}
+                      onClick={() => { setOpen(false); edittodolist(eid) }}
                     >
                       Save
                     </button>
@@ -270,7 +269,6 @@ export default function Home() {
   return (
     <Base title="A Todo App" description="Manage your events at one place">
       <Menu />
-
       {Todofrom()}
       {popup()}
       <Sidebar />
